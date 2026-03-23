@@ -48,7 +48,10 @@
               else
               {
                 <li class="nav-item">
-                  <a class="nav-link text-white mx-2" asp-controller="Booking" asp-action="MyBookings">@_localization.Getkey("Flights").Value</a>
+                  <a class="nav-link text-white mx-2" asp-controller="Flight" asp-action="BrowseFlights">@_localization.Getkey("Browse Flights").Value</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white mx-2" asp-controller="Booking" asp-action="MyBookings">@_localization.Getkey("My Bookings").Value</a>
                 </li>
                 <li class="nav-item">
                   <span class="nav-link text-gold mx-2">Welcome, @User.Identity.Name</span>

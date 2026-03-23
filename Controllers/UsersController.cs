@@ -105,7 +105,7 @@ namespace AirlineSeatReservationSystem.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Email and password already exist");
+                    ModelState.AddModelError("", _localization.Getkey("Email and password already exist").Value);
                 }
 
             }
@@ -171,7 +171,7 @@ namespace AirlineSeatReservationSystem.Controllers
                     }
                 }
 
-                ModelState.AddModelError("", "Email or password is incorrect");
+                ModelState.AddModelError("", _localization.Getkey("Email or password is incorrect").Value);
             }
 
             return View(model);

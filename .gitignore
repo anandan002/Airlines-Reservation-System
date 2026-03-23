@@ -6,6 +6,10 @@
 # dotenv files
 .env
 
+# Repo-local .NET SDK/tooling
+.dotnet/
+/dotnet-tools.json
+
 # User-specific files
 *.rsuser
 *.suo
@@ -486,3 +490,5 @@ $RECYCLE.BIN/
 appsettings.Development.json
 appsettings.Production.json
 *.log
+.dotnet/dotnet
+AGENTS.md

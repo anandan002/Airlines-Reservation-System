@@ -57,7 +57,7 @@
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Login failed');
+                throw new Error('@_localization.Getkey("Login failed").Value');
             }
             return response.json();
         })

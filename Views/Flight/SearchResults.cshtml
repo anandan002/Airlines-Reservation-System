@@ -1,4 +1,8 @@
 @model IEnumerable<AirlineSeatReservationSystem.Models.FlightCreateViewModel>
+  @{
+    var resultsTitle = ViewBag.ResultsTitle as string ?? _localization.Getkey("Flights").Value;
+    var emptyMessage = ViewBag.EmptyMessage as string ?? _localization.Getkey("No flights found.").Value;
+  }
   <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
   
   @if (User.IsInRole("admin"))
@@ -22,7 +26,7 @@
           <tbody>
             @if (!Model.Any())
             {
-              <p>No flights found.</p>
+              <p>@_localization.Getkey("No flights found.").Value</p>
             }
             else
             {
@@ -37,7 +41,7 @@
                   <td>@flight.Time</td>
                   <td>
                     <a href="/Flight/Edit/@flight.FlightId" class="btn btn-sm btn-primary">Edit</a>
-                    <form asp-action="Delete" method="post" onsubmit="return confirm('emin misiniz?')"
+                    <form asp-action="Delete" method="post" onsubmit="return confirm('@_localization.Getkey("Are you sure?").Value')"
                       style="display: inline-block">
                       <input type="hidden" name="FlightId" value="@flight.FlightId" />
                       <button type="submit" class="btn btn-danger btn-sm">
@@ -64,11 +68,12 @@
           @if (!Model.Any())
           {
             <div class="alert alert-info text-center">
-              No flights found for your search criteria.
+              @emptyMessage
             </div>
           }
           else
           {
+            <h2 class="text-center mb-4 text-navy">@resultsTitle</h2>
             foreach (var flight in Model)
             {
               <div class="flight-card mb-4">

@@ -92,6 +92,12 @@
 
                 <!-- Search Button -->
                 <div class="col-12 mt-4 text-end">
+                  @if (User.Identity?.IsAuthenticated == true)
+                  {
+                    <a href="@Url.Action("BrowseFlights", "Flight")" class="btn btn-outline-light btn-lg px-4 me-2">
+                      @_localization.Getkey("Browse All Flights").Value
+                    </a>
+                  }
                   <button type="submit" class="btn btn-primary btn-lg px-5">
                     @_localization.Getkey("Search Flights").Value
                   </button>

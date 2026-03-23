@@ -48,7 +48,12 @@ public class FlightController : Controller
 
 
         var currentCulture = Thread.CurrentThread.CurrentCulture.Name;
-        return View();
+        return View(new FlightViewModel
+        {
+            From = "Istanbul",
+            To = "Ankara",
+            Guest = "Adult"
+        });
     }
     public IActionResult ChangeLanguage(string culture)
     {
@@ -124,13 +129,19 @@ public class FlightController : Controller
         if (User.Identity?.IsAuthenticated != true)
         {
             // TempData kullanarak bir sonraki request'e kadar veri saklayabilirsiniz.
-            TempData["Error"] = "You must be logged in to view this page.";
+            TempData["Error"] = _localization.Getkey("You must be logged in to view this page.").Value;
             return RedirectToAction("Index");
         }
         if (string.IsNullOrWhiteSpace(model.Depart))
         {
-            ModelState.AddModelError("", "Departure location cannot be empty.");
-            TempData["Error"] = "Departure location cannot be empty.";
+            ModelState.AddModelError("", _localization.Getkey("Departure date cannot be empty.").Value);
+            TempData["Error"] = _localization.Getkey("Departure date cannot be empty.").Value;
+            return RedirectToAction("Index");
+        }
+        if (string.Equals(model.From, model.To, StringComparison.OrdinalIgnoreCase))
+        {
+            ModelState.AddModelError("", _localization.Getkey("Departure and arrival locations must be different.").Value);
+            TempData["Error"] = _localization.Getkey("Departure and arrival locations must be different.").Value;
             return RedirectToAction("Index");
         }
         if (ModelState.IsValid)
@@ -168,6 +179,8 @@ public class FlightController : Controller
 
             }).ToListAsync();
 
+            ViewBag.ResultsTitle = _localization.Getkey("Matching Flights").Value;
+            ViewBag.EmptyMessage = _localization.Getkey("No flights found for your search criteria.").Value;
 
             return View("SearchResults", flights);
         }
@@ -205,11 +218,36 @@ public class FlightController : Controller
 
             }).ToListAsync();
 
+            ViewBag.ResultsTitle = _localization.Getkey("Matching Flights").Value;
+            ViewBag.EmptyMessage = _localization.Getkey("No flights found for your search criteria.").Value;
+
             return View("SearchResults", flights);
 
         }
 
         return View("Index", model);
+    }
+
+    [Authorize]
+    public async Task<IActionResult> BrowseFlights()
+    {
+        var flights = await _repository.Flights
+            .Select(flightEntity => new FlightCreateViewModel
+            {
+                FlightId = flightEntity.FlightId,
+                From = flightEntity.From,
+                To = flightEntity.To,
+                Depart = flightEntity.Depart,
+                Return = flightEntity.Return,
+                Time = flightEntity.Time,
+                Guest = flightEntity.Guest
+            })
+            .ToListAsync();
+
+        ViewBag.ResultsTitle = _localization.Getkey("Available Flights").Value;
+        ViewBag.EmptyMessage = _localization.Getkey("No flights are available right now.").Value;
+
+        return View("SearchResults", flights);
     }
 
 
@@ -230,6 +268,9 @@ public class FlightController : Controller
                 // Burada diğer gerekli alanları da ekleyebilirsiniz
             })
             .ToListAsync();
+
+        ViewBag.ResultsTitle = _localization.Getkey("All Flights").Value;
+        ViewBag.EmptyMessage = _localization.Getkey("No flights found.").Value;
 
         return View("SearchResults", flights);
     }

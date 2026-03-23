@@ -99,7 +99,7 @@ namespace AirlineSeatReservationSystem.Controllers
         public async Task<IActionResult> ChooseSeats(ChooseSeatsViewModel model, int flightId)
         {
             await _seatRepository.ReserveSeat(model.SelectedSeat);
-            TempData["SuccessMessage"] = "Uçuşunuz başarılı bir şekilde oluşturuldu.";
+            TempData["SuccessMessage"] = _localization.Getkey("Your booking has been created successfully.").Value;
 
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim != null)
@@ -120,7 +120,7 @@ namespace AirlineSeatReservationSystem.Controllers
             }
             else
             {
-                return Json(new { success = false, message = "User not authenticated." });
+                return Json(new { success = false, message = _localization.Getkey("User not authenticated.").Value });
             }
         }
 

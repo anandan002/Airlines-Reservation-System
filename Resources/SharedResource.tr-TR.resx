@@ -233,4 +233,70 @@
     <value>Uçuş Ara</value>
     <comment>Search Flights</comment>
   </data>
+  <data name="Browse Flights" xml:space="preserve">
+    <value>Uçuşlara Göz At</value>
+  </data>
+  <data name="My Bookings" xml:space="preserve">
+    <value>Rezervasyonlarım</value>
+  </data>
+  <data name="Browse All Flights" xml:space="preserve">
+    <value>Tüm Uçuşları Gör</value>
+  </data>
+  <data name="Available Flights" xml:space="preserve">
+    <value>Müsait Uçuşlar</value>
+  </data>
+  <data name="Matching Flights" xml:space="preserve">
+    <value>Eşleşen Uçuşlar</value>
+  </data>
+  <data name="All Flights" xml:space="preserve">
+    <value>Tüm Uçuşlar</value>
+  </data>
+  <data name="No flights found." xml:space="preserve">
+    <value>Uçuş bulunamadı.</value>
+  </data>
+  <data name="No flights found for your search criteria." xml:space="preserve">
+    <value>Arama kriterlerinize uygun uçuş bulunamadı.</value>
+  </data>
+  <data name="No flights are available right now." xml:space="preserve">
+    <value>Şu anda müsait uçuş bulunmuyor.</value>
+  </data>
+  <data name="No bookings found." xml:space="preserve">
+    <value>Rezervasyon bulunamadı.</value>
+  </data>
+  <data name="Create New Flight" xml:space="preserve">
+    <value>Yeni Uçuş Oluştur</value>
+  </data>
+  <data name="Add Flight" xml:space="preserve">
+    <value>Uçuş Ekle</value>
+  </data>
+  <data name="Passenger Type" xml:space="preserve">
+    <value>Yolcu Türü</value>
+  </data>
+  <data name="You must be logged in to view this page." xml:space="preserve">
+    <value>Bu sayfayı görüntülemek için giriş yapmalısınız.</value>
+  </data>
+  <data name="Departure date cannot be empty." xml:space="preserve">
+    <value>Gidiş tarihi boş bırakılamaz.</value>
+  </data>
+  <data name="Departure and arrival locations must be different." xml:space="preserve">
+    <value>Kalkış ve varış noktaları farklı olmalıdır.</value>
+  </data>
+  <data name="Email and password already exist" xml:space="preserve">
+    <value>E-posta ve şifre zaten mevcut.</value>
+  </data>
+  <data name="Email or password is incorrect" xml:space="preserve">
+    <value>E-posta veya şifre yanlış.</value>
+  </data>
+  <data name="Your booking has been created successfully." xml:space="preserve">
+    <value>Rezervasyonunuz başarıyla oluşturuldu.</value>
+  </data>
+  <data name="User not authenticated." xml:space="preserve">
+    <value>Kullanıcı doğrulanmadı.</value>
+  </data>
+  <data name="Are you sure?" xml:space="preserve">
+    <value>Emin misiniz?</value>
+  </data>
+  <data name="Login failed" xml:space="preserve">
+    <value>Giriş başarısız</value>
+  </data>
 </root>
