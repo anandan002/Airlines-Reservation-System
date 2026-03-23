@@ -42,7 +42,7 @@
                   <span class="nav-link text-gold mx-2">Welcome, @User.Identity.Name</span>
                 </li>
                 <li class="nav-item">
-                  <a href="/users/logout" class="btn btn-modern btn-sm ms-2">@_localization.Getkey("Logout").Value</a>
+                  <a asp-controller="Users" asp-action="Logout" class="btn btn-modern btn-sm ms-2">@_localization.Getkey("Logout").Value</a>
                 </li>
               }
               else
@@ -57,7 +57,7 @@
                   <span class="nav-link text-gold mx-2">Welcome, @User.Identity.Name</span>
                 </li>
                 <li class="nav-item">
-                  <a href="/users/logout" class="btn btn-modern btn-sm ms-2">@_localization.Getkey("Logout").Value</a>
+                  <a asp-controller="Users" asp-action="Logout" class="btn btn-modern btn-sm ms-2">@_localization.Getkey("Logout").Value</a>
                 </li>
               }
             }

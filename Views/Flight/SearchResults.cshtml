@@ -12,7 +12,7 @@
       <div class="col-12 py-5">
   
         <br>
-        <a href="/Flight/Create" class="btn btn-warning ">@_localization.Getkey("New Flight").Value</a>
+        <a asp-controller="Flight" asp-action="Create" class="btn btn-warning ">@_localization.Getkey("New Flight").Value</a>
         <br>
         <table class="table table-bordered table-dark ">
           <thead>
@@ -40,7 +40,7 @@
                   <td>@flight.To</td>
                   <td>@flight.Time</td>
                   <td>
-                    <a href="/Flight/Edit/@flight.FlightId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-controller="Flight" asp-action="Edit" asp-route-id="@flight.FlightId" class="btn btn-sm btn-primary">Edit</a>
                     <form asp-action="Delete" method="post" onsubmit="return confirm('@_localization.Getkey("Are you sure?").Value')"
                       style="display: inline-block">
                       <input type="hidden" name="FlightId" value="@flight.FlightId" />

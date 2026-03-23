@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using AirlineSeatReservationSystem.Services;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 
 namespace AirlineSeatReservationSystem.Controllers
@@ -32,13 +33,14 @@ namespace AirlineSeatReservationSystem.Controllers
         private readonly LanguageService _localization;
 
         private readonly ISeatRepository _seatRepository;
+        private readonly AdminSettings _adminSettings;
 
         private readonly IUserRepository _userRepository;
         private readonly IFlightRepository _flightRepository;
 
         public object? HashHelper { get; private set; }
 
-        public UsersController(IBookingRepository bookingRepository, IUserRepository usersRepository, IFlightRepository flightRepository, ISeatRepository seatRepository, IConfiguration configuration, ILogger<UsersController> logger, LanguageService localization)
+        public UsersController(IBookingRepository bookingRepository, IUserRepository usersRepository, IFlightRepository flightRepository, ISeatRepository seatRepository, IConfiguration configuration, ILogger<UsersController> logger, LanguageService localization, IOptions<AdminSettings> adminSettings)
         {
             _bookingRepository = bookingRepository;
 
@@ -49,6 +51,7 @@ namespace AirlineSeatReservationSystem.Controllers
             _seatRepository = seatRepository;
             _logger = logger;
             _localization = localization;
+            _adminSettings = adminSettings.Value;
         }
 
         public async Task<IActionResult> Index()
@@ -134,12 +137,10 @@ namespace AirlineSeatReservationSystem.Controllers
                 if (user != null)
                 {
                     // Admin yetkisi kontrolü
-                    bool isAdmin = (user.Email == "g211210013@sakarya.edu.tr" || user.Email == "g201210093@sakarya.edu.tr")
-                                   && _userRepository.VerifyPassword("sau", user.Password);
+                    bool isAdmin = _adminSettings.IsAdminEmail(user.Email);
 
                     // Kullanıcı veya admin için şifre doğrulaması
-                    if ((isAdmin && _userRepository.VerifyPassword("sau", user.Password)) ||
-                        (!isAdmin && _userRepository.VerifyPassword(model.Password, user.Password)))
+                    if (_userRepository.VerifyPassword(model.Password, user.Password))
                     {
                         var userClaims = new List<Claim>
                 {

@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AirlineSeatReservationSystem.Services;
+using Microsoft.Extensions.Options;
 
 namespace AirlineSeatReservationSystem.Controllers
 {
@@ -28,16 +30,18 @@ namespace AirlineSeatReservationSystem.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
+        private readonly AdminSettings _adminSettings;
 
 
         private readonly IFlightRepository _repository;
 
-        public FlightApiController(IFlightRepository repository, IConfiguration configuration, IUserRepository usersRepository)
+        public FlightApiController(IFlightRepository repository, IConfiguration configuration, IUserRepository usersRepository, IOptions<AdminSettings> adminSettings)
         {
             _repository = repository;
             _userRepository = usersRepository;
 
             _configuration = configuration;
+            _adminSettings = adminSettings.Value;
 
         }
 
@@ -96,7 +100,7 @@ namespace AirlineSeatReservationSystem.Controllers
                 if (user != null && _userRepository.VerifyPassword(model.Password, user.Password))
                 {
                     // Admin kontrolü
-                    var isAdmin = (user.Email == "g211210013@sakarya.edu.tr" || user.Email == "g201210093@sakarya.edu.tr");
+                    var isAdmin = _adminSettings.IsAdminEmail(user.Email);
 
                     // Claims listesi oluşturuluyor
                     var claims = new List<Claim>
