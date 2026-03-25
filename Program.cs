@@ -36,8 +36,8 @@ builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddLocalization(options => options.ResourcesPath= "Resources");
 builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (type,factory) =>
 {
-    var assemblyName= new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
-    return factory.Create(nameof(SharedResource), assemblyName.Name);
+    var assemblyName= new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName ?? "AirlineSeatReservationSystem");
+    return factory.Create(nameof(SharedResource), assemblyName.Name ?? "AirlineSeatReservationSystem");
 
 });
 
@@ -88,7 +88,7 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
         ValidateIssuer = false,
         ValidateAudience = false,
     };

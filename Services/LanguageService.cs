@@ -15,7 +15,7 @@ namespace AirlineSeatReservationSystem.Services
         public LanguageService(IStringLocalizerFactory factory)
         {
             var type = typeof(SharedResource);
-            var assemblyName= new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+            var assemblyName= new AssemblyName(type.GetTypeInfo().Assembly.FullName ?? "AirlineSeatReservationSystem");
 
             _localizer = factory.Create(nameof(SharedResource), assemblyName.Name ?? "AirlineSeatReservationSystem");
 

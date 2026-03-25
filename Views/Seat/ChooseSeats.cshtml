@@ -10,6 +10,7 @@
         <div class="fuselage">
             <form id="seatSelectionForm" method="post">
                 <input type="hidden" id="FlightId" value="@Model.FlightId" />
+                <input type="hidden" name="flightId" value="@Model.FlightId" />
                 <input type="hidden" id="SelectedSeatId" name="SelectedSeat" required />
 
                 @{

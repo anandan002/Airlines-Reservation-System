@@ -492,3 +492,4 @@ appsettings.Production.json
 *.log
 .dotnet/dotnet
 AGENTS.md
+.claude

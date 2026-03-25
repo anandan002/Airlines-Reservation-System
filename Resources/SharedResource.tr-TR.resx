@@ -299,4 +299,43 @@
   <data name="Login failed" xml:space="preserve">
     <value>Giriş başarısız</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>Seç</value>
+  </data>
+  <data name="Passenger Details" xml:space="preserve">
+    <value>Yolcu Bilgileri</value>
+  </data>
+  <data name="Full Name" xml:space="preserve">
+    <value>Ad Soyad</value>
+  </data>
+  <data name="Date of Birth" xml:space="preserve">
+    <value>Doğum Tarihi</value>
+  </data>
+  <data name="Passport / ID Number" xml:space="preserve">
+    <value>Pasaport / Kimlik Numarası</value>
+  </data>
+  <data name="Continue to Seat Selection" xml:space="preserve">
+    <value>Koltuk Seçimine Devam Et</value>
+  </data>
+  <data name="Flight Summary" xml:space="preserve">
+    <value>Uçuş Özeti</value>
+  </data>
+  <data name="Booking Summary" xml:space="preserve">
+    <value>Rezervasyon Özeti</value>
+  </data>
+  <data name="Passenger Information" xml:space="preserve">
+    <value>Yolcu Bilgileri</value>
+  </data>
+  <data name="Seat Information" xml:space="preserve">
+    <value>Koltuk Bilgisi</value>
+  </data>
+  <data name="Total Price" xml:space="preserve">
+    <value>Toplam Fiyat</value>
+  </data>
+  <data name="Confirm &amp; Pay" xml:space="preserve">
+    <value>Onayla &amp; Öde</value>
+  </data>
+  <data name="Selected seat is no longer available." xml:space="preserve">
+    <value>Seçilen koltuk artık müsait değil. Lütfen başka bir koltuk seçin.</value>
+  </data>
 </root>

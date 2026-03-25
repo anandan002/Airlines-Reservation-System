@@ -101,9 +101,9 @@
                       <span class="text-muted small">Starting from</span>
                       <div class="h4 text-navy mb-0">$150</div> <!-- Dummy price -->
                     </div>
-                    <a href="@Url.Action("ChooseSeats", "Seat", new { flightId = flight.FlightId })"
+                    <a href="@Url.Action("PassengerDetails", "Booking", new { flightId = flight.FlightId })"
                        class="btn btn-modern">
-                       @_localization.Getkey("Seat").Value @_localization.Getkey("Choose").Value
+                       @_localization.Getkey("Select").Value
                     </a>
                   </div>
                 </div>

@@ -15,6 +15,7 @@
           <th>@_localization.Getkey("Departure Date").Value</th>
           <th>@_localization.Getkey("Return Date").Value</th>
           <th>@_localization.Getkey("Seat Number").Value</th>
+          <th>@_localization.Getkey("Full Name").Value</th>
         </tr>
       </thead>
 
@@ -26,7 +27,8 @@
           <td>@booking.Flight.Time</td>
           <td>@booking.Flight.Depart</td>
           <td>@booking.Flight.Return</td>
-          <td> @_localization.Getkey("Seat").Value @booking.Seat.SeatNumber.Substring(5)</td>
+          <td> @_localization.Getkey("Seat").Value @(booking.Seat.SeatNumber?[5..])</td>
+          <td>@booking.PassengerName</td>
         </tr>
         }
       </tbody>

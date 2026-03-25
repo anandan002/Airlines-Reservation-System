@@ -1,0 +1,103 @@
+@model AirlineSeatReservationSystem.Models.BookingConfirmationViewModel
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <h2 class="text-center mb-4 text-navy">@ViewBag.BookingSummary</h2>
+
+            @* Flight Summary Card *@
+            <div class="flight-card mb-4">
+                <div class="flight-card-header">
+                    <span><i class="fas fa-plane me-2"></i>@ViewBag.FlightSummary — Flight #@Model.FlightId</span>
+                    <span class="badge bg-warning text-dark">Economy</span>
+                </div>
+                <div class="flight-card-body">
+                    <div class="flight-route">
+                        <div class="text-center">
+                            <div class="flight-time">@Model.FlightTime</div>
+                            <div class="text-muted">@Model.FlightFrom</div>
+                        </div>
+                        <div class="flight-duration">
+                            <i class="fas fa-plane text-navy"></i>
+                            <div>Direct</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="flight-time">--:--</div>
+                            <div class="text-muted">@Model.FlightTo</div>
+                        </div>
+                    </div>
+                    <div class="text-end border-top pt-2 mt-2">
+                        <span class="text-muted small">@ViewBag.DepartureDate:</span>
+                        <span class="text-navy fw-bold ms-1">@Model.FlightDepart</span>
+                    </div>
+                </div>
+            </div>
+
+            @* Details Grid *@
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="auth-card h-100">
+                        <div class="card-header">
+                            <h2 style="font-size:1.1rem;">@ViewBag.PassengerInfo</h2>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-5">@ViewBag.FullName</dt>
+                                <dd class="col-sm-7">@Model.PassengerName</dd>
+
+                                <dt class="col-sm-5">@ViewBag.DateOfBirth</dt>
+                                <dd class="col-sm-7">@Model.PassengerDob</dd>
+
+                                <dt class="col-sm-5">@ViewBag.PassportId</dt>
+                                <dd class="col-sm-7">@Model.PassengerPassportId</dd>
+
+                                <dt class="col-sm-5">@ViewBag.Phone</dt>
+                                <dd class="col-sm-7">@Model.PassengerPhone</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="auth-card h-100">
+                        <div class="card-header">
+                            <h2 style="font-size:1.1rem;">@ViewBag.SeatInfo</h2>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-5">@ViewBag.SeatNumber</dt>
+                                <dd class="col-sm-7">@Model.SeatNumber</dd>
+
+                                <dt class="col-sm-5">@ViewBag.TotalPrice</dt>
+                                <dd class="col-sm-7 h4 text-navy mb-0">$@Model.Price</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* Confirm & Pay form — all data carried as hidden fields *@
+            <form asp-action="Confirm" asp-controller="Booking" method="post">
+                <input type="hidden" asp-for="FlightId" />
+                <input type="hidden" asp-for="SeatId" />
+                <input type="hidden" asp-for="PassengerName" />
+                <input type="hidden" asp-for="PassengerDob" />
+                <input type="hidden" asp-for="PassengerPassportId" />
+                <input type="hidden" asp-for="PassengerPhone" />
+                <input type="hidden" asp-for="FlightFrom" />
+                <input type="hidden" asp-for="FlightTo" />
+                <input type="hidden" asp-for="FlightDepart" />
+                <input type="hidden" asp-for="FlightTime" />
+                <input type="hidden" asp-for="Price" />
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-modern btn-lg">
+                        <i class="fas fa-credit-card me-2"></i>@ViewBag.ConfirmPay
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

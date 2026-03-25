@@ -12,6 +12,10 @@ public class Booking
     public int FlightId { get; set; }
     public int SeatId { get; set; }
 
+    public string? PassengerName { get; set; }
+    public string? PassengerDob { get; set; }
+    public string? PassengerPassportId { get; set; }
+    public string? PassengerPhone { get; set; }
 
     public virtual Flight Flight { get; set; } = null!;
     public virtual Seat Seat { get; set; } = null!;

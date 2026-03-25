@@ -55,9 +55,11 @@ namespace AirlineSeatReservationSystem.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
         [Authorize]
-
         public IActionResult ChooseSeats(int flightId)
         {
+            if (TempData.ContainsKey("PassengerDetails"))
+                TempData.Keep("PassengerDetails");
+
             var flightExists = _context.Flights.Any(f => f.FlightId == flightId);
             if (!flightExists)
             {
@@ -94,34 +96,14 @@ namespace AirlineSeatReservationSystem.Controllers
 
 
         [Authorize]
-
         [HttpPost]
-        public async Task<IActionResult> ChooseSeats(ChooseSeatsViewModel model, int flightId)
+        public IActionResult ChooseSeats(ChooseSeatsViewModel model, int flightId)
         {
-            await _seatRepository.ReserveSeat(model.SelectedSeat);
-            TempData["SuccessMessage"] = _localization.Getkey("Your booking has been created successfully.").Value;
+            if (TempData.ContainsKey("PassengerDetails"))
+                TempData.Keep("PassengerDetails");
 
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim != null)
-            {
-                var userNo = int.Parse(userIdClaim.Value);
-                var booking = new Booking
-                {
-                    UserNo = userNo,
-                    FlightId = flightId,
-                    SeatId = model.SelectedSeat,
-
-                };
-
-                _bookingRepository.Add(booking);
-                _bookingRepository.SaveChanges(); // Eğer kaydetme işlemi async ise
-
-                return RedirectToAction("Index", "Flight");
-            }
-            else
-            {
-                return Json(new { success = false, message = _localization.Getkey("User not authenticated.").Value });
-            }
+            TempData["SelectedSeatId"] = model.SelectedSeat.ToString();
+            return RedirectToAction("Confirm", "Booking");
         }
 
 

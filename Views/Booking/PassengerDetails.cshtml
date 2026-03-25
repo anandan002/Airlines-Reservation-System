@@ -1,0 +1,95 @@
+@model AirlineSeatReservationSystem.Models.PassengerDetailsViewModel
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+
+            @* Flight Summary Card *@
+            <div class="flight-card mb-4">
+                <div class="flight-card-header">
+                    <span><i class="fas fa-plane me-2"></i>Flight #@Model.FlightId</span>
+                    <span class="badge bg-warning text-dark">Economy</span>
+                </div>
+                <div class="flight-card-body">
+                    <div class="flight-route">
+                        <div class="text-center">
+                            <div class="flight-time">@Model.FlightTime</div>
+                            <div class="text-muted">@Model.FlightFrom</div>
+                        </div>
+                        <div class="flight-duration">
+                            <i class="fas fa-plane text-navy"></i>
+                            <div>Direct</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="flight-time">--:--</div>
+                            <div class="text-muted">@Model.FlightTo</div>
+                        </div>
+                    </div>
+                    <div class="text-end border-top pt-2 mt-2">
+                        <span class="text-muted small">@ViewBag.DepartureDate:</span>
+                        <span class="text-navy fw-bold ms-1">@Model.FlightDepart</span>
+                    </div>
+                </div>
+            </div>
+
+            @* Passenger Details Form *@
+            <div class="auth-card">
+                <div class="card-header">
+                    <h2>@ViewBag.PassengerDetails</h2>
+                </div>
+                <div class="card-body">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+                    <form asp-action="PassengerDetails" asp-controller="Booking" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <input type="hidden" asp-for="FlightId" />
+                        <input type="hidden" asp-for="FlightFrom" />
+                        <input type="hidden" asp-for="FlightTo" />
+                        <input type="hidden" asp-for="FlightDepart" />
+                        <input type="hidden" asp-for="FlightTime" />
+
+                        <div class="mb-3">
+                            <label asp-for="PassengerName" class="form-label">@ViewBag.FullName</label>
+                            <input asp-for="PassengerName" class="form-control" placeholder="e.g. John Doe" />
+                            <span asp-validation-for="PassengerName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PassengerDob" class="form-label">@ViewBag.DateOfBirth</label>
+                            <input asp-for="PassengerDob" class="form-control" type="date" />
+                            <span asp-validation-for="PassengerDob" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PassengerPassportId" class="form-label">@ViewBag.PassportId</label>
+                            <input asp-for="PassengerPassportId" class="form-control" />
+                            <span asp-validation-for="PassengerPassportId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PassengerPhone" class="form-label">@ViewBag.Phone</label>
+                            <input asp-for="PassengerPhone" class="form-control" type="tel" />
+                            <span asp-validation-for="PassengerPhone" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-modern btn-lg">
+                                @ViewBag.Continue
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -299,4 +299,43 @@
   <data name="Login failed" xml:space="preserve">
     <value>Login failed</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Passenger Details" xml:space="preserve">
+    <value>Passenger Details</value>
+  </data>
+  <data name="Full Name" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Date of Birth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="Passport / ID Number" xml:space="preserve">
+    <value>Passport / ID Number</value>
+  </data>
+  <data name="Continue to Seat Selection" xml:space="preserve">
+    <value>Continue to Seat Selection</value>
+  </data>
+  <data name="Flight Summary" xml:space="preserve">
+    <value>Flight Summary</value>
+  </data>
+  <data name="Booking Summary" xml:space="preserve">
+    <value>Booking Summary</value>
+  </data>
+  <data name="Passenger Information" xml:space="preserve">
+    <value>Passenger Information</value>
+  </data>
+  <data name="Seat Information" xml:space="preserve">
+    <value>Seat Information</value>
+  </data>
+  <data name="Total Price" xml:space="preserve">
+    <value>Total Price</value>
+  </data>
+  <data name="Confirm &amp; Pay" xml:space="preserve">
+    <value>Confirm &amp; Pay</value>
+  </data>
+  <data name="Selected seat is no longer available." xml:space="preserve">
+    <value>Selected seat is no longer available. Please choose another seat.</value>
+  </data>
 </root>

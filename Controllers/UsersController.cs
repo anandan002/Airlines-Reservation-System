@@ -93,7 +93,7 @@ namespace AirlineSeatReservationSystem.Controllers
                 var user = await _userRepository.Users.FirstOrDefaultAsync(x => x.UserName == model.UserName || x.Email == model.Email);
                 if (user == null)
                 {
-                    var hashedPassword = _userRepository.HashPassword(model.Password);
+                    var hashedPassword = _userRepository.HashPassword(model.Password!);
                     _userRepository.CreateUser(new User
                     {
 
@@ -140,13 +140,13 @@ namespace AirlineSeatReservationSystem.Controllers
                     bool isAdmin = _adminSettings.IsAdminEmail(user.Email);
 
                     // Kullanıcı veya admin için şifre doğrulaması
-                    if (_userRepository.VerifyPassword(model.Password, user.Password))
+                    if (_userRepository.VerifyPassword(model.Password!, user.Password!))
                     {
                         var userClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.UserNo.ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email)
+                    new Claim(ClaimTypes.Name, user.UserName!),
+                    new Claim(ClaimTypes.Email, user.Email!)
                 };
 
                         if (isAdmin)

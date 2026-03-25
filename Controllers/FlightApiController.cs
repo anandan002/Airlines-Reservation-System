@@ -97,7 +97,7 @@ namespace AirlineSeatReservationSystem.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userRepository.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
-                if (user != null && _userRepository.VerifyPassword(model.Password, user.Password))
+                if (user != null && _userRepository.VerifyPassword(model.Password!, user.Password!))
                 {
                     // Admin kontrolü
                     var isAdmin = _adminSettings.IsAdminEmail(user.Email);
@@ -106,13 +106,13 @@ namespace AirlineSeatReservationSystem.Controllers
                     var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserNo.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.UserName!),
+                new Claim(ClaimTypes.Email, user.Email!),
                 new Claim(ClaimTypes.Role, isAdmin ? "admin" : "user")
             };
 
                     // JWT token için gerekli anahtar ve credentials
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
                     var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                     var expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["Jwt:ExpiryInDays"]));
 
